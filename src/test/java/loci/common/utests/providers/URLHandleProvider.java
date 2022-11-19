@@ -35,6 +35,7 @@ package loci.common.utests.providers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import loci.common.IRandomAccess;
 import loci.common.URLHandle;
@@ -51,7 +52,7 @@ class URLHandleProvider implements IRandomAccessProvider {
   @Override
   public IRandomAccess createMock(
       byte[] page, String mode, int bufferSize) throws IOException {
-    File f = File.createTempFile("url", ".dat");
+    File f = Files.createTempFile("url", ".dat").toFile();
     f.deleteOnExit();
     FileOutputStream out = new FileOutputStream(f);
     out.write(page);

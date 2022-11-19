@@ -36,6 +36,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import loci.common.BZip2Handle;
 import loci.common.GZipHandle;
@@ -52,21 +53,21 @@ public class TypeDetectionTest {
 
   @Test
   public void testBZip2TypeDetection() throws IOException {
-    File invalidFile = File.createTempFile("invalid", ".bz2");
+    File invalidFile = Files.createTempFile("invalid", ".bz2").toFile();
     invalidFile.deleteOnExit();
     assertEquals(BZip2Handle.isBZip2File(invalidFile.getAbsolutePath()), false);
   }
 
   @Test
   public void testGZipTypeDetection() throws IOException {
-    File invalidFile = File.createTempFile("invalid", ".gz");
+    File invalidFile = Files.createTempFile("invalid", ".gz").toFile();
     invalidFile.deleteOnExit();
     assertEquals(GZipHandle.isGZipFile(invalidFile.getAbsolutePath()), false);
   }
 
   @Test
   public void testZipTypeDetection() throws IOException {
-    File invalidFile = File.createTempFile("invalid", ".zip");
+    File invalidFile = Files.createTempFile("invalid", ".zip").toFile();
     invalidFile.deleteOnExit();
     assertEquals(ZipHandle.isZipFile(invalidFile.getAbsolutePath()), false);
   }

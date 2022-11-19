@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.zip.GZIPOutputStream;
 
 import loci.common.GZipHandle;
@@ -53,7 +54,7 @@ class GZipHandleProvider implements IRandomAccessProvider {
   @Override
   public IRandomAccess createMock(
       byte[] page, String mode, int bufferSize) throws IOException {
-    File pageFile = File.createTempFile("page", ".gz");
+    File pageFile = Files.createTempFile("page", ".gz").toFile();
     pageFile.deleteOnExit();
     OutputStream out = new GZIPOutputStream(new FileOutputStream(pageFile));
     out.write(page);

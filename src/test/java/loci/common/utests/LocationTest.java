@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -87,14 +88,14 @@ public class LocationTest {
     boolean success = tmpDirectory.mkdirs();
     tmpDirectory.deleteOnExit();
 
-    File hiddenFile = File.createTempFile(".hiddenTest", null, tmpDirectory);
+    File hiddenFile = Files.createTempFile(tmpDirectory.toPath(), ".hiddenTest", null).toFile();
     hiddenFile.deleteOnExit();
 
-    File invalidFile = File.createTempFile("invalidTest", null, tmpDirectory);
+    File invalidFile = Files.createTempFile(tmpDirectory.toPath(), "invalidTest", null).toFile();
     String invalidPath = invalidFile.getAbsolutePath();
     invalidFile.delete();
 
-    File validFile = File.createTempFile("validTest", null, tmpDirectory);
+    File validFile = Files.createTempFile(tmpDirectory.toPath(), "validTest", null).toFile();
     validFile.deleteOnExit();
 
     files = new Location[] {

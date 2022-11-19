@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import loci.common.IRandomAccess;
 import loci.common.NIOFileHandle;
@@ -52,7 +53,7 @@ class NIOFileHandleProvider implements IRandomAccessProvider {
   @Override
   public IRandomAccess createMock(
       byte[] page, String mode, int bufferSize) throws IOException {
-    File pageFile = File.createTempFile("page", ".dat");
+    File pageFile = Files.createTempFile("page", ".dat").toFile();
     pageFile.deleteOnExit();
     OutputStream stream = new FileOutputStream(pageFile);
     try {

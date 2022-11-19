@@ -38,6 +38,7 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import loci.common.Constants;
 import loci.common.HandleException;
@@ -64,7 +65,7 @@ public class URLHandleTest {
 
   @BeforeMethod
   public void setup() throws IOException {
-    File tmpFile = File.createTempFile("urlhandle", "tmp");
+    File tmpFile = Files.createTempFile("urlhandle", "tmp").toFile();
     tmpFile.deleteOnExit();
     FileOutputStream out = new FileOutputStream(tmpFile);
     out.write("hello, world!\n".getBytes(Constants.ENCODING));

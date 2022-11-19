@@ -35,6 +35,7 @@ package loci.common.utests.providers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -53,7 +54,7 @@ class ZipHandleProvider implements IRandomAccessProvider {
   @Override
   public IRandomAccess createMock(
       byte[] page, String mode, int bufferSize) throws IOException {
-    File pageFile = File.createTempFile("page", ".zip");
+    File pageFile = Files.createTempFile("page", ".zip").toFile();
     pageFile.deleteOnExit();
     ZipOutputStream out = new ZipOutputStream(new FileOutputStream(pageFile));
     out.putNextEntry(new ZipEntry(pageFile.getName()));
